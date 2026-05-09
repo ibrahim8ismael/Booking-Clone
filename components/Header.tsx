@@ -22,7 +22,7 @@ export function Header() {
   ];
 
   return (
-    <header className="bg-[#0758AA] text-white">
+    <header className="bg-[#FED852] text-[#0758AA]">
       <div className="max-w-6xl mx-auto px-4">
         {/* Top bar */}
         <div className="flex items-center justify-between py-4">
@@ -33,16 +33,15 @@ export function Header() {
           <div className="flex items-center gap-2 md:gap-4">
             <button 
               onClick={toggleLanguage}
-              className="p-2 hover:bg-white/10 rounded-sm"
+              className="p-2 hover:bg-black/5 rounded-sm font-bold"
               title="Change Language"
             >
               {language === 'ar' ? 'English' : 'عربي'}
             </button>
-            <button className="hidden sm:block font-medium p-2 hover:bg-white/10 rounded-sm">?</button>
             
             <Link 
               href="/search"
-              className="bg-[#FED852] text-[#0758AA] hover:bg-[#fbd141] font-bold px-6 py-2 rounded-sm text-sm transition-colors"
+              className="bg-[#0758AA] text-white hover:bg-[#064a91] font-bold px-6 py-2 rounded-sm text-sm transition-colors"
             >
               {language === 'ar' ? 'احجز الآن' : 'Book Now'}
             </Link>

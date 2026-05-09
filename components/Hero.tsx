@@ -59,12 +59,12 @@ export function Hero() {
 
   return (
     <div className="relative mb-12 sm:mb-16 md:mb-20">
-      <div className="bg-[#0758AA] text-white pt-10 pb-12 md:pb-16 px-4">
+      <div className="bg-[#FED852] text-[#0758AA] pt-10 pb-12 md:pb-16 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.h1 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold mb-3"
+            className="text-4xl md:text-5xl font-extrabold mb-3"
           >
             {t.hero.title}
           </motion.h1>
@@ -72,7 +72,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-xl md:text-2xl mb-6 md:mb-10"
+            className="text-xl md:text-2xl mb-6 md:mb-10 font-bold"
           >
             {t.hero.subtitle}
           </motion.p>
@@ -100,28 +100,26 @@ export function Hero() {
 
             {/* Date Range Picker (Combines Check-In and Check-Out) */}
             <Popover open={isOpen} onOpenChange={setIsOpen}>
-              <PopoverTrigger 
-                className="flex-[1.5] w-full flex flex-col md:flex-row items-center gap-1 cursor-pointer outline-none"
-              >
-                <div className="flex-1 bg-white rounded-sm w-full h-full flex items-center px-4 py-3 gap-3 hover:bg-gray-50 transition-colors">
-                  <CalendarIcon className="text-gray-400 w-6 h-6 flex-shrink-0" />
-                  <div className="flex flex-col w-full text-left rtl:text-right">
-                     <span className="text-xs text-gray-500 font-medium">{t.hero.checkIn}</span>
-                     <span className={cn("text-sm font-medium h-5 flex items-center", date.from ? "text-gray-900" : "text-gray-400")}>
-                       {date.from ? format(date.from, 'E, MMM d', { locale }) : '- -- ----'}
-                     </span>
+              <PopoverTrigger className="flex-[1.5] w-full flex flex-col md:flex-row items-center gap-1 cursor-pointer outline-none bg-transparent m-0 p-0 border-none font-sans">
+                  <div className="flex-1 bg-white rounded-sm w-full h-full flex items-center px-4 py-3 gap-3 hover:bg-gray-50 transition-colors">
+                    <CalendarIcon className="text-gray-400 w-6 h-6 flex-shrink-0" />
+                    <div className="flex flex-col w-full text-left rtl:text-right">
+                       <span className="text-xs text-gray-500 font-medium">{t.hero.checkIn}</span>
+                       <span className={cn("text-sm font-medium h-5 flex items-center", date.from ? "text-gray-900" : "text-gray-400")}>
+                         {date.from ? format(date.from, 'E, MMM d', { locale }) : '- -- ----'}
+                       </span>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="flex-1 bg-white rounded-sm w-full h-full flex items-center px-4 py-3 gap-3 hover:bg-gray-50 transition-colors">
-                  <CalendarIcon className="text-gray-400 w-6 h-6 flex-shrink-0" />
-                  <div className="flex flex-col w-full text-left rtl:text-right">
-                     <span className="text-xs text-gray-500 font-medium">{t.hero.checkOut}</span>
-                     <span className={cn("text-sm font-medium h-5 flex items-center", date.to ? "text-gray-900" : "text-gray-400")}>
-                       {date.to ? format(date.to, 'E, MMM d', { locale }) : '- -- ----'}
-                     </span>
+                  
+                  <div className="flex-1 bg-white rounded-sm w-full h-full flex items-center px-4 py-3 gap-3 hover:bg-gray-50 transition-colors">
+                    <CalendarIcon className="text-gray-400 w-6 h-6 flex-shrink-0" />
+                    <div className="flex flex-col w-full text-left rtl:text-right">
+                       <span className="text-xs text-gray-500 font-medium">{t.hero.checkOut}</span>
+                       <span className={cn("text-sm font-medium h-5 flex items-center", date.to ? "text-gray-900" : "text-gray-400")}>
+                         {date.to ? format(date.to, 'E, MMM d', { locale }) : '- -- ----'}
+                       </span>
+                    </div>
                   </div>
-                </div>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0 z-[100]" align="start">
                 <Calendar

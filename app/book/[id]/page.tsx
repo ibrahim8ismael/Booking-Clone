@@ -6,6 +6,7 @@ import { useLanguage } from '@/components/LanguageProvider';
 import { Footer } from '@/components/Footer';
 import Image from 'next/image';
 import { MapPin, Star, ThumbsUp, Check, Info } from 'lucide-react';
+import Link from 'next/link';
 
 export default function BookPage() {
   const params = useParams();
@@ -130,13 +131,50 @@ export default function BookPage() {
                 <span className="text-2xl font-bold text-gray-900">EGP {stay.price}</span>
               </div>
 
-              <button className="w-full bg-[#0758AA] hover:bg-[#064a91] text-white font-bold text-lg py-3 rounded-sm transition-colors shadow-sm">
+              <Link 
+                href={`/checkout/${params.id}`} 
+                className="w-full bg-[#0758AA] hover:bg-[#064a91] text-white font-bold text-lg py-3 rounded-sm transition-colors shadow-sm block text-center"
+              >
                 {language === 'ar' ? 'احجز الآن' : 'Reserve'}
-              </button>
+              </Link>
               <p className="text-center text-xs text-gray-500 mt-3">
                 {language === 'ar' ? 'الموقع سيطلب تفاصيل الدفع لتأكيد الحجز' : 'You will be asked for payment details to confirm.'}
               </p>
             </div>
+          </div>
+        </div>
+
+        {/* Reviews Section */}
+        <div className="mt-12 mb-8">
+          <h2 className="text-2xl font-bold mb-6 text-gray-900 border-b border-gray-200 pb-4">
+            {language === 'ar' ? 'تقييمات الضيوف' : 'Guest Reviews'}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[...Array(10)].map((_, i) => (
+              <div key={i} className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm flex flex-col gap-3">
+                <div className="flex justify-between items-start">
+                  <div className="flex gap-3 items-center">
+                    <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 overflow-hidden">
+                      <Image src={`https://picsum.photos/seed/user${i}/100/100`} alt="User" width={40} height={40} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-900 text-sm">Reviewer {i + 1}</h4>
+                      <p className="text-xs text-gray-500">{language === 'ar' ? 'مصر' : 'Egypt'}</p>
+                    </div>
+                  </div>
+                  <div className="bg-[#0758AA] text-white text-sm font-bold w-7 h-7 flex items-center justify-center rounded-sm rounded-tr-none">
+                    {(9 + Math.random()).toFixed(1)}
+                  </div>
+                </div>
+                <div className="mt-2">
+                  <p className="text-sm text-gray-700 italic">
+                    "{language === 'ar' 
+                      ? 'إقامة رائعة جداً، المكان نظيف وطاقم العمل ودود. أنصح به بشدة!' 
+                      : 'Very wonderful stay, the place is clean and the staff is friendly. Highly recommend it!'}"
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
