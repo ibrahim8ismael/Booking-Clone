@@ -3,6 +3,7 @@
 import { Hero } from '@/components/Hero';
 import { Offers } from '@/components/Offers';
 import { UniqueStays } from '@/components/UniqueStays';
+import { FAQ } from '@/components/FAQ';
 import { Footer } from '@/components/Footer';
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
       <Hero />
       <Offers />
       <UniqueStays />
+      <FAQ />
       <div className="flex-grow" />
       <Footer />
     </main>

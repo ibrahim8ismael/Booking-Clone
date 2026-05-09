@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useLanguage } from './LanguageProvider';
+import { Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
 
 export function Footer() {
   const { language } = useLanguage();
@@ -88,13 +89,29 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="text-center font-normal">
-          <p className="mb-4">
-            {isAr ? 'حقوق الطبع والنشر © 1996–2026 Booking.com™. جميع الحقوق محفوظة.' : 'Copyright © 1996–2026 Booking.com™. All rights reserved.'}
-          </p>
-          <p className="text-white/60 text-xs">
-            {isAr ? 'تم بناء هذه النسخة لأغراض تعليمية باستخدام AI Studio.' : 'Clone built for educational purposes with AI Studio.'}
-          </p>
+        <div className="flex flex-col md:flex-row items-center justify-between font-normal gap-4">
+          <div className="text-center md:text-left rtl:text-right">
+            <p className="mb-2">
+              {isAr ? 'حقوق الطبع والنشر © 1996–2026 Booking.com™. جميع الحقوق محفوظة.' : 'Copyright © 1996–2026 Booking.com™. All rights reserved.'}
+            </p>
+            <p className="text-white/60 text-xs">
+              {isAr ? 'تم بناء هذه النسخة لأغراض تعليمية باستخدام AI Studio.' : 'Clone built for educational purposes with AI Studio.'}
+            </p>
+          </div>
+          <div className="flex items-center gap-4 text-white hover:[&>a]:scale-110 [&>a]:transition-transform">
+            <a href="#" aria-label="Facebook">
+              <Facebook className="w-6 h-6" />
+            </a>
+            <a href="#" aria-label="Twitter">
+              <Twitter className="w-6 h-6" />
+            </a>
+            <a href="#" aria-label="Instagram">
+              <Instagram className="w-6 h-6" />
+            </a>
+            <a href="#" aria-label="YouTube">
+              <Youtube className="w-6 h-6" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
