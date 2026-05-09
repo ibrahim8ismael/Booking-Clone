@@ -2,7 +2,8 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from './LanguageProvider';
-import { BedDouble, Calendar as CalendarIcon, User, Minus, Plus } from 'lucide-react';
+import { Command, CommandItem, CommandList, CommandEmpty, CommandGroup } from '@/components/ui/command';
+import { BedDouble, Calendar as CalendarIcon, User, Minus, Plus, MapPin } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
@@ -16,6 +17,17 @@ export function Hero() {
   const router = useRouter();
 
   const [destination, setDestination] = useState('');
+  const [openDest, setOpenDest] = useState(false);
+  const destRef = useRef<HTMLDivElement>(null);
+  const places = [
+    { value: 'cairo', label: 'Cairo, Egypt', arLabel: 'القاهرة، مصر' },
+    { value: 'alex', label: 'Alexandria, Egypt', arLabel: 'الإسكندرية، مصر' },
+    { value: 'sharm', label: 'Sharm El Sheikh, Egypt', arLabel: 'شرم الشيخ، مصر' },
+    { value: 'hurghada', label: 'Hurghada, Egypt', arLabel: 'الغردقة، مصر' },
+    { value: 'luxor', label: 'Luxor, Egypt', arLabel: 'الأقصر، مصر' },
+    { value: 'aswan', label: 'Aswan, Egypt', arLabel: 'أسوان، مصر' },
+  ];
+
   const [date, setDate] = useState<{ from?: Date; to?: Date }>({});
   const [isOpen, setIsOpen] = useState(false);
   
@@ -87,15 +99,68 @@ export function Hero() {
             className="w-full bg-[#f2f2f2] p-1 rounded-sm flex flex-col md:flex-row gap-1 shadow-md border border-[#FED852] md:border-none md:ring-[3px] md:ring-[#FED852]"
           >
             {/* Destination */}
-            <div className="flex-[1.2] bg-white flex items-center px-4 py-3 rounded-sm gap-3 cursor-text">
-              <BedDouble className="text-gray-400 w-6 h-6 flex-shrink-0" />
-              <input 
-                type="text" 
-                placeholder={t.hero.searchPlaceholder}
-                className="w-full outline-none text-gray-900 placeholder:text-gray-500 bg-transparent text-sm font-medium h-6"
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-              />
+            <div className="flex-[1.2] relative block z-50 overflow-visible" ref={destRef}>
+              <div 
+                className="bg-white flex items-center px-4 py-3 rounded-sm gap-3 cursor-text h-full hover:bg-gray-50 transition-colors border-none"
+                onClick={() => setOpenDest(true)}
+              >
+                <BedDouble className="text-gray-400 w-6 h-6 flex-shrink-0" />
+                <input 
+                  type="text" 
+                  placeholder={t.hero.searchPlaceholder}
+                  className="w-full outline-none text-gray-900 placeholder:text-gray-500 bg-transparent text-sm font-medium h-6"
+                  value={destination}
+                  onChange={(e) => {
+                    setDestination(e.target.value);
+                    setOpenDest(true);
+                  }}
+                  onFocus={() => setOpenDest(true)}
+                />
+              </div>
+
+              <AnimatePresence>
+                {openDest && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute top-[calc(100%+8px)] w-full sm:min-w-[300px] bg-white rounded-lg shadow-2xl z-[100] border border-gray-200 right-auto rtl:right-0 ltr:left-0 max-h-[300px] overflow-hidden flex flex-col"
+                  >
+                    <Command className="bg-white w-full border-none" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                      <CommandList className="max-h-[300px] overflow-y-auto w-full">
+                        {places.filter(p => !destination || p.label.toLowerCase().includes(destination.toLowerCase()) || p.arLabel.includes(destination)).length === 0 ? (
+                          <CommandEmpty className="py-6 text-center text-sm text-gray-500">
+                            {language === 'ar' ? 'لا يوجد نتائج.' : 'No results found.'}
+                          </CommandEmpty>
+                        ) : (
+                          <CommandGroup heading={language === 'ar' ? 'الوجهات الشهيرة' : 'Popular Destinations'}>
+                            {places.filter(p => !destination || p.label.toLowerCase().includes(destination.toLowerCase()) || p.arLabel.includes(destination)).map((place) => (
+                              <CommandItem
+                                key={place.value}
+                                value={place.value}
+                                onSelect={() => {
+                                  setDestination(language === 'ar' ? place.arLabel : place.label);
+                                  setOpenDest(false);
+                                }}
+                                className="px-4 py-3 hover:bg-[#EBF3FF] cursor-pointer flex items-center gap-3 transition-colors m-1"
+                              >
+                                <div className="bg-gray-100 p-2 rounded-md shrink-0">
+                                  <MapPin className="text-gray-500 w-5 h-5" />
+                                </div>
+                                <div className="flex flex-col text-left rtl:text-right">
+                                  <span className="text-sm font-bold text-gray-900">{language === 'ar' ? place.arLabel : place.label}</span>
+                                  <span className="text-xs text-gray-500">{language === 'ar' ? 'مدينة في مصر' : 'City, Egypt'}</span>
+                                </div>
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        )}
+                      </CommandList>
+                    </Command>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Date Range Picker (Combines Check-In and Check-Out) */}
@@ -121,7 +186,7 @@ export function Hero() {
                     </div>
                   </div>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0 z-[100]" align="start">
+              <PopoverContent className="w-auto p-0 z-[100] bg-white border-gray-200 shadow-xl" align="start">
                 <Calendar
                   mode="range"
                   selected={{ from: date.from, to: date.to }}

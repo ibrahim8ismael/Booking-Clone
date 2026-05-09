@@ -7,10 +7,12 @@ import { Footer } from '@/components/Footer';
 import Image from 'next/image';
 import { MapPin, Star, ThumbsUp, Check, Info } from 'lucide-react';
 import Link from 'next/link';
+import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogHeader, DialogOverlay } from '@/components/ui/dialog';
 
 export default function BookPage() {
   const params = useParams();
   const { language } = useLanguage();
+  const [isGalleryOpen, setIsGalleryOpen] = React.useState(false);
   
   // Mock data, in real app would fetch based on params.id
   const stay = { 
@@ -64,16 +66,52 @@ export default function BookPage() {
           </div>
         </div>
 
-        {/* Hero Image */}
-        <div className="w-full h-[400px] relative rounded-lg overflow-hidden mb-8 shadow-sm">
-          <Image 
-            src={stay.image}
-            fill
-            alt={stay.name}
-            className="object-cover"
-            referrerPolicy="no-referrer"
-          />
+        {/* Hero Image Gallery */}
+        <div 
+          className="grid grid-cols-4 gap-2 h-[300px] md:h-[400px] mb-8"
+          onClick={() => setIsGalleryOpen(true)}
+        >
+          <div className="col-span-2 row-span-2 relative rounded-l-lg overflow-hidden cursor-pointer group">
+             <Image src={stay.image} fill alt={stay.name} className="object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
+          </div>
+          <div className="relative overflow-hidden cursor-pointer group">
+             <Image src="https://picsum.photos/seed/stay12_room/600/400" fill alt="Room 1" className="object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
+          </div>
+          <div className="relative overflow-hidden rounded-tr-lg cursor-pointer group">
+             <Image src="https://picsum.photos/seed/stay12_view/600/400" fill alt="View" className="object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
+          </div>
+          <div className="relative overflow-hidden cursor-pointer group">
+             <Image src="https://picsum.photos/seed/stay12_pool/600/400" fill alt="Pool" className="object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
+          </div>
+          <div className="relative overflow-hidden rounded-br-lg cursor-pointer group flex items-center justify-center">
+             <Image src="https://picsum.photos/seed/stay12_bath/600/400" fill alt="Bathroom" className="object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
+             <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                <span className="text-white font-bold text-lg">+12 {language === 'ar' ? 'صور' : 'Photos'}</span>
+             </div>
+          </div>
         </div>
+
+        {/* Gallery Dialog */}
+        <Dialog open={isGalleryOpen} onOpenChange={setIsGalleryOpen}>
+          <DialogContent className="max-w-5xl h-[80vh] flex flex-col p-0 gap-0 overflow-hidden bg-black border-none">
+            <DialogHeader className="sr-only">
+              <DialogTitle>Photo Gallery</DialogTitle>
+              <DialogDescription>Browse all photos of the property</DialogDescription>
+            </DialogHeader>
+            <div className="flex-1 overflow-y-auto p-4 md:p-8 custom-scrollbar">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="col-span-full h-[400px] relative rounded-lg overflow-hidden">
+                  <Image src={stay.image} fill alt="Main" className="object-cover" referrerPolicy="no-referrer" />
+                </div>
+                {Array.from({ length: 12 }).map((_, i) => (
+                  <div key={i} className="aspect-[4/3] relative rounded-lg overflow-hidden">
+                    <Image src={`https://picsum.photos/seed/stay12_gall_${i}/800/600`} fill alt={`Gallery ${i}`} className="object-cover" referrerPolicy="no-referrer" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
 
         {/* Content Section */}
         <div className="flex flex-col lg:flex-row gap-8">

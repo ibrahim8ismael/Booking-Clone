@@ -12,6 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Calendar } from '@/components/ui/calendar';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
+import { arSA, enUS } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
 
 export default function CheckoutPage() {
@@ -60,13 +61,16 @@ export default function CheckoutPage() {
                         )}
                       >
                         <CalendarIcon className={cn("w-5 h-5 text-gray-400 shrink-0", isAr ? "ml-3" : "mr-3")} />
-                        {checkIn ? format(checkIn, "PPP") : <span>{isAr ? "اختر تاريخ" : "Pick a date"}</span>}
+                        {checkIn ? format(checkIn, "PPP", { locale: isAr ? arSA : enUS }) : <span>{isAr ? "اختر تاريخ" : "Pick a date"}</span>}
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0 z-50">
+                    <PopoverContent className="w-auto p-0 z-[100] bg-white border border-gray-200 shadow-xl">
                       <Calendar
                         mode="single"
                         selected={checkIn}
                         onSelect={setCheckIn}
+                        locale={isAr ? arSA : enUS}
+                        dir={isAr ? 'rtl' : 'ltr'}
+                        className="bg-white rounded-md"
                       />
                     </PopoverContent>
                   </Popover>
@@ -85,13 +89,16 @@ export default function CheckoutPage() {
                         )}
                       >
                         <CalendarIcon className={cn("w-5 h-5 text-gray-400 shrink-0", isAr ? "ml-3" : "mr-3")} />
-                        {checkOut ? format(checkOut, "PPP") : <span>{isAr ? "اختر تاريخ" : "Pick a date"}</span>}
+                        {checkOut ? format(checkOut, "PPP", { locale: isAr ? arSA : enUS }) : <span>{isAr ? "اختر تاريخ" : "Pick a date"}</span>}
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0 z-50">
+                    <PopoverContent className="w-auto p-0 z-[100] bg-white border border-gray-200 shadow-xl">
                       <Calendar
                         mode="single"
                         selected={checkOut}
                         onSelect={setCheckOut}
+                        locale={isAr ? arSA : enUS}
+                        dir={isAr ? 'rtl' : 'ltr'}
+                        className="bg-white rounded-md"
                       />
                     </PopoverContent>
                   </Popover>
