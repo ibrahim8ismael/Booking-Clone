@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { LanguageProvider } from '@/components/LanguageProvider';
+import { AuthProvider } from '@/components/AuthProvider';
 import { Header } from '@/components/Header';
 import { Cairo } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -21,8 +22,10 @@ export default function RootLayout({
     <html lang="en" className={cn("font-sans", cairo.variable)}>
       <body>
         <LanguageProvider>
-          <Header />
-          {children}
+          <AuthProvider>
+            <Header />
+            {children}
+          </AuthProvider>
         </LanguageProvider>
       </body>
     </html>

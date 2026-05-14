@@ -3,12 +3,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { useLanguage } from './LanguageProvider';
-import { BedDouble, Plane, TreePalm, Car, Menu } from 'lucide-react';
+import { useAuth } from './AuthProvider';
+import { BedDouble, Plane, TreePalm, Car, Menu, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion } from 'motion/react';
 
 export function Header() {
   const { language, setLanguage } = useLanguage();
+  const { isLoggedIn } = useAuth();
 
   const toggleLanguage = () => {
     setLanguage(language === 'ar' ? 'en' : 'ar');
@@ -39,12 +41,22 @@ export function Header() {
               {language === 'ar' ? 'English' : 'عربي'}
             </button>
             
-            <Link 
-              href="/signin"
-              className="bg-[#0758AA] text-white hover:bg-[#064a91] font-bold px-6 py-2 rounded-sm text-sm transition-colors"
-            >
-              {language === 'ar' ? 'تسجيل الدخول' : 'Sign in'}
-            </Link>
+            {isLoggedIn ? (
+              <Link 
+                href="/profile"
+                className="bg-[#0758AA] text-white hover:bg-[#064a91] font-bold px-4 py-2 rounded-sm text-sm transition-colors flex items-center gap-2"
+              >
+                <User className="w-4 h-4" />
+                <span className="hidden sm:inline">{language === 'ar' ? 'الملف الشخصي' : 'Profile'}</span>
+              </Link>
+            ) : (
+              <Link 
+                href="/signin"
+                className="bg-[#0758AA] text-white hover:bg-[#064a91] font-bold px-6 py-2 rounded-sm text-sm transition-colors"
+              >
+                {language === 'ar' ? 'تسجيل الدخول' : 'Sign in'}
+              </Link>
+            )}
           </div>
         </div>
       </div>

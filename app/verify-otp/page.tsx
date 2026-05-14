@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { useLanguage } from '@/components/LanguageProvider';
+import { useAuth } from '@/components/AuthProvider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -16,6 +17,7 @@ function VerifyOTPContent() {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [countdown, setCountdown] = useState(60);
+  const { login } = useAuth();
 
   useEffect(() => {
     if (countdown > 0) {
@@ -81,7 +83,8 @@ function VerifyOTPContent() {
     if (code.length === 6) {
       // In a real app, verify OTP here
       // For now, simulate success
-      router.push('/');
+      login();
+      router.push('/profile');
     }
   };
 
