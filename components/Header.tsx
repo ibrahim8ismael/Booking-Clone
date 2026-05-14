@@ -7,14 +7,20 @@ import { useAuth } from './AuthProvider';
 import { BedDouble, Plane, TreePalm, Car, Menu, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion } from 'motion/react';
+import { usePathname } from 'next/navigation';
 
 export function Header() {
   const { language, setLanguage } = useLanguage();
   const { isLoggedIn } = useAuth();
+  const pathname = usePathname();
 
   const toggleLanguage = () => {
     setLanguage(language === 'ar' ? 'en' : 'ar');
   };
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   const navItems = [
     { name: language === 'ar' ? 'الإقامات' : 'Stays', icon: BedDouble, active: true },
