@@ -261,7 +261,11 @@ export default function ProfilePage() {
                                     </div>
                                 </div>
                                 <div className="mt-4 pt-4 border-t border-gray-100 flex justify-end">
-                                    <Button variant="outline" className="text-[#0071c2] border-[#0071c2] hover:bg-[#0071c2]/5 h-9 font-bold">
+                                    <Button 
+                                        variant="outline" 
+                                        className="text-[#0071c2] border-[#0071c2] hover:bg-[#0071c2]/5 h-9 font-bold"
+                                        onClick={() => router.push(`/booking/${booking.id}`)}
+                                    >
                                         {t.viewDetails}
                                     </Button>
                                 </div>
