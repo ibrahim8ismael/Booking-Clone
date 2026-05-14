@@ -40,10 +40,10 @@ export function Header() {
             </button>
             
             <Link 
-              href="/search"
+              href="/signin"
               className="bg-[#0758AA] text-white hover:bg-[#064a91] font-bold px-6 py-2 rounded-sm text-sm transition-colors"
             >
-              {language === 'ar' ? 'احجز الآن' : 'Book Now'}
+              {language === 'ar' ? 'تسجيل الدخول' : 'Sign in'}
             </Link>
           </div>
         </div>
