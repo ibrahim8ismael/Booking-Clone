@@ -11,7 +11,7 @@ import { usePathname } from 'next/navigation';
 
 export function Header() {
   const { language, setLanguage } = useLanguage();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
   const pathname = usePathname();
 
   const toggleLanguage = () => {
@@ -48,13 +48,21 @@ export function Header() {
             </button>
             
             {isLoggedIn ? (
-              <Link 
-                href="/profile"
-                className="bg-[#0758AA] text-white hover:bg-[#064a91] font-bold px-4 py-2 rounded-sm text-sm transition-colors flex items-center gap-2"
-              >
-                <User className="w-4 h-4" />
-                <span className="hidden sm:inline">{language === 'ar' ? 'الملف الشخصي' : 'Profile'}</span>
-              </Link>
+              <div className="flex items-center gap-2">
+                <Link 
+                  href="/profile"
+                  className="bg-[#0758AA] text-white hover:bg-[#064a91] font-bold px-4 py-2 rounded-sm text-sm transition-colors flex items-center gap-2"
+                >
+                  <User className="w-4 h-4" />
+                  <span className="hidden sm:inline">{language === 'ar' ? 'الملف الشخصي' : 'Profile'}</span>
+                </Link>
+                <button
+                  onClick={logout}
+                  className="bg-transparent text-[#0758AA] hover:bg-black/5 font-bold px-4 py-2 rounded-sm text-sm transition-colors"
+                >
+                  {language === 'ar' ? 'تسجيل الخروج' : 'Logout'}
+                </button>
+              </div>
             ) : (
               <Link 
                 href="/signin"

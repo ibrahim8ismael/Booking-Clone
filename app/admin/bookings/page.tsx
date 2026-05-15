@@ -236,24 +236,24 @@ export default function AdminBookingsPage() {
 
       {/* Delete Confirmation Dialog */}
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-        <DialogContent className="sm:max-w-md bg-white" dir={isAr ? 'rtl' : 'ltr'}>
-          <div className="flex flex-col items-center text-center pt-6 pb-4">
-            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
+        <DialogContent className="sm:max-w-md bg-white border-none shadow-2xl rounded-2xl" dir={isAr ? 'rtl' : 'ltr'} showCloseButton={false}>
+          <div className="flex flex-col items-center text-center pt-6 pb-2">
+            <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-5 ring-8 ring-red-50/50">
               <Trash2 className="w-8 h-8 text-red-600" />
             </div>
-            <DialogHeader>
-              <DialogTitle className="text-xl font-bold mb-2">
+            <DialogHeader className="w-full">
+              <DialogTitle className="text-2xl font-bold text-gray-900 mb-1 flex justify-center text-center">
                 {t.deleteConfirmTitle}
               </DialogTitle>
             </DialogHeader>
-            <p className="text-gray-500 text-sm max-w-sm mx-auto">{t.deleteConfirmDesc}</p>
+            <p className="text-gray-500 text-sm max-w-[280px] mx-auto leading-relaxed mt-2">{t.deleteConfirmDesc}</p>
           </div>
-          <DialogFooter className="flex gap-3 sm:justify-center px-4 pb-6 w-full sm:w-full">
+          <div className="flex gap-3 px-2 pb-2 w-full mt-4">
             <Button 
               type="button" 
               variant="outline"
+              className="flex-1 font-bold h-12 rounded-xl text-gray-700 bg-white border-gray-200 hover:bg-gray-50 hover:text-gray-900"
               onClick={() => setIsDeleteDialogOpen(false)}
-              className="flex-1 font-bold"
             >
               {t.cancel}
             </Button>
@@ -261,11 +261,11 @@ export default function AdminBookingsPage() {
               type="button" 
               variant="destructive"
               onClick={handleDelete}
-              className="flex-1 font-bold bg-red-600 hover:bg-red-700 text-white"
+              className="flex-1 font-bold h-12 rounded-xl bg-red-600 hover:bg-red-700 text-white"
             >
               {t.deleteRecord}
             </Button>
-          </DialogFooter>
+          </div>
         </DialogContent>
       </Dialog>
 
