@@ -68,6 +68,16 @@ export default function AdminHotelFormPage() {
 
   const mealPlansList = ['BB (Bed & Breakfast)', 'HB (Half Board)', 'FB (Full Board)', 'Soft All Inclusive', 'Ultra All Inclusive'];
 
+  const facilitiesList = [
+    { id: 'wifi', label: isAr ? 'واي فاي مجاني' : 'Free WiFi' },
+    { id: 'kids', label: isAr ? 'منطقة أطفال' : 'Kids Area' },
+    { id: 'pool', label: isAr ? 'مسبح' : 'Swimming Pool' },
+    { id: 'parking', label: isAr ? 'موقف سيارات' : 'Parking' },
+    { id: 'gym', label: isAr ? 'صالة رياضية' : 'Gym' },
+    { id: 'restaurant', label: isAr ? 'مطعم' : 'Restaurant' },
+    { id: 'beach', label: isAr ? 'شاطئ خاص' : 'Private Beach' },
+  ];
+
   const handleAddRoom = () => {
     setRooms([...rooms, { id: Date.now().toString(), type: '', price: 0, adultCap: 2, childCap: 1, view: '', connectedReady: false, count: 1 }]);
   };
@@ -382,6 +392,22 @@ export default function AdminHotelFormPage() {
                 <label className="text-sm font-bold text-gray-700">{t.address}</label>
                 <Textarea placeholder={isAr ? 'العنوان التفصيلي' : 'Full street address'} className="bg-gray-50 h-20 border-gray-200 resize-none" />
               </div>
+            </div>
+          </section>
+
+          {/* Facilities */}
+          <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-5">
+            <div className="flex items-center gap-2 mb-4">
+              <Star className="w-5 h-5 text-yellow-400" />
+              <h2 className="text-lg font-bold text-gray-900">{t.facilities}</h2>
+            </div>
+            <div className="space-y-3">
+              {facilitiesList.map(facility => (
+                <label key={facility.id} className="flex items-center gap-3 cursor-pointer">
+                  <input type="checkbox" className="w-4 h-4 rounded border-gray-300 text-yellow-500 focus:ring-yellow-500" />
+                  <span className="text-gray-700 font-medium text-sm">{facility.label}</span>
+                </label>
+              ))}
             </div>
           </section>
 
