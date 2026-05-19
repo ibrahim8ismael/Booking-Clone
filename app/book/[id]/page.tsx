@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useLanguage } from '@/components/LanguageProvider';
 import { Footer } from '@/components/Footer';
 import Image from 'next/image';
-import { MapPin, Check, Info, Users, Baby, Link as LinkIcon, Utensils, BedDouble, Minus, Plus, Calendar } from 'lucide-react';
+import { MapPin, Check, Info, Users, Baby, Link as LinkIcon, Utensils, BedDouble, Coffee, Wifi, Mountain, ParkingCircle, Clock, Heart } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogHeader } from '@/components/ui/dialog';
 
@@ -14,12 +14,6 @@ export default function BookPage() {
   const router = useRouter();
   const { language } = useLanguage();
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  
-  const [selectedRoomId, setSelectedRoomId] = useState('1');
-  const [adults, setAdults] = useState(2);
-  const [kids, setKids] = useState(0);
-  const [nights, setNights] = useState(1);
-  const [roomsCount, setRoomsCount] = useState(1);
   
   // Mock data, in real app would fetch based on params.id
   const isHOT001 = params.id === 'HOT-001';
@@ -55,15 +49,6 @@ export default function BookPage() {
       { ageFrom: 6, ageTo: 11.99, discount: 50 }
     ]
   };
-
-  const selectedRoom = stay.rooms.find(r => r.id === selectedRoomId) || stay.rooms[0];
-  
-  // Pricing Calculation
-  const roomBasePrice = selectedRoom.price;
-  const kidsPrice = kids * 25; // 25 per kid
-  const extraAdults = Math.max(0, adults - (selectedRoom.adultCap * roomsCount));
-  const extraAdultPrice = extraAdults * 40; // 40 per extra adult
-  const totalPrice = (roomBasePrice * roomsCount + kidsPrice + extraAdultPrice) * nights;
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -128,224 +113,181 @@ export default function BookPage() {
         </Dialog>
 
         {/* Content Section */}
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
+          
           {/* Main Content */}
-          <div className="flex-[2] flex flex-col gap-8">
+          <div className="flex-[2] flex flex-col gap-8 w-full">
+            {/* Property Highlights */}
+            <section>
+              <h2 className="text-xl font-bold mb-4">{language === 'ar' ? 'ميزات مكان الإقامة' : 'Property Highlights'}</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="flex items-center justify-center text-center gap-3 p-4 border border-gray-200 rounded-xl bg-white shadow-sm flex-col">
+                  <div className="text-[#0758AA] bg-[#EBF3FF] p-3 rounded-full">
+                    <Coffee className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span className="block font-bold text-sm text-gray-900">{language === 'ar' ? 'إفطار' : 'Breakfast'}</span>
+                    <span className="block text-xs text-gray-500 mt-1">{language === 'ar' ? 'إفطار جيد' : 'Good Breakfast'}</span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-center text-center gap-3 p-4 border border-gray-200 rounded-xl bg-white shadow-sm flex-col">
+                  <div className="text-[#0758AA] bg-[#EBF3FF] p-3 rounded-full">
+                    <Wifi className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span className="block font-bold text-sm text-gray-900">{language === 'ar' ? 'واي فاي مجاني' : 'Free WiFi'}</span>
+                    <span className="block text-xs text-gray-500 mt-1">{language === 'ar' ? 'واي فاي مجاني' : 'Free WiFi'}</span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-center text-center gap-3 p-4 border border-gray-200 rounded-xl bg-white shadow-sm flex-col">
+                  <div className="text-[#0758AA] bg-[#EBF3FF] p-3 rounded-full">
+                    <Mountain className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span className="block font-bold text-sm text-gray-900">{language === 'ar' ? 'الإطلالات' : 'Views'}</span>
+                    <span className="block text-xs text-gray-500 mt-1">{language === 'ar' ? 'إطلالة على معلم' : 'Landmark view'}</span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-center text-center gap-3 p-4 border border-gray-200 rounded-xl bg-white shadow-sm flex-col">
+                  <div className="text-[#0758AA] bg-[#EBF3FF] p-3 rounded-full">
+                    <ParkingCircle className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span className="block font-bold text-sm text-gray-900">{language === 'ar' ? 'مواقف السيارات' : 'Parking'}</span>
+                    <span className="block text-xs text-gray-500 mt-1">{language === 'ar' ? 'مواقف مجانية' : 'Free parking'}</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
             <section className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-              <h2 className="text-xl font-bold mb-4">{language === 'ar' ? 'وصف مكان الإقامة' : 'Property Description'}</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <p className="text-gray-900 leading-relaxed font-medium">
                 {stay.description}
               </p>
             </section>
             
             <section className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-              <h2 className="text-xl font-bold mb-4">{language === 'ar' ? 'المرافق الأبرز' : 'Main Facilities'}</h2>
-              <ul className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <h2 className="text-xl font-bold mb-6">{language === 'ar' ? 'أكثر المرافق رواجاً' : 'Most Popular Facilities'}</h2>
+              <ul className="flex flex-wrap gap-x-8 gap-y-4">
                 {stay.facilities.map((facility, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm font-medium text-gray-700 p-2 rounded-lg bg-gray-50 border border-gray-100">
-                    <Check className="w-4 h-4 text-green-600 shrink-0" />
+                  <li key={i} className="flex items-center gap-2 text-sm font-bold text-gray-900">
+                    <Check className="w-5 h-5 text-green-600 shrink-0" />
                     {facility.label}
                   </li>
                 ))}
               </ul>
             </section>
 
-            <section className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-              <div className="flex items-center gap-2 mb-4">
-                <Utensils className="w-5 h-5 text-orange-500" />
-                <h2 className="text-xl font-bold">{language === 'ar' ? 'خطط الوجبات المتوفرة' : 'Available Meal Plans'}</h2>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {stay.mealPlans.map((plan, i) => (
-                  <span key={i} className="bg-orange-50 text-orange-700 px-3 py-1.5 rounded-lg text-sm font-bold border border-orange-100">
-                    {plan}
-                  </span>
-                ))}
-              </div>
-            </section>
-
-            <section className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-              <div className="p-6 border-b border-gray-200">
-                <h2 className="text-xl font-bold">{language === 'ar' ? 'الأسعار والغرف المتوفرة' : 'Availability & Prices'}</h2>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left" dir={language === 'ar' ? 'rtl' : 'ltr'}>
-                  <thead className="bg-[#0758AA] text-white">
-                    <tr>
-                      <th className="px-6 py-4 font-bold">{language === 'ar' ? 'نوع الغرفة' : 'Room Type'}</th>
-                      <th className="px-6 py-4 font-bold">{language === 'ar' ? 'السعة القصوى' : 'Max Capacity'}</th>
-                      <th className="px-6 py-4 font-bold">{language === 'ar' ? 'السعر (ليلة)' : 'Price (Night)'}</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200">
-                    {stay.rooms.map((room) => (
-                      <tr key={room.id} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-6 py-4">
-                          <div className="flex flex-col gap-1">
-                            <span className="font-bold text-gray-900 text-lg flex items-center gap-2">
-                              {room.type}
-                            </span>
-                            <span className="text-sm text-gray-500">{room.view}</span>
-                            {room.connectedReady && (
-                              <span className="text-xs text-[#0758AA] bg-blue-50 px-2 py-0.5 rounded flex w-fit items-center gap-1 mt-1 font-medium">
-                                <LinkIcon className="w-3 h-3" />
-                                {language === 'ar' ? 'يدعم غرف متصلة' : 'Connected rooms supported'}
-                              </span>
-                            )}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                           <div className="flex items-center gap-3">
-                              <div className="flex items-center gap-1 text-gray-700 bg-gray-100 px-2 py-1 rounded-md">
-                                 <Users className="w-4 h-4" />
-                                 <span className="font-bold">{room.adultCap}</span>
-                              </div>
-                              <div className="flex items-center gap-1 text-gray-700 bg-gray-100 px-2 py-1 rounded-md">
-                                 <Baby className="w-4 h-4" />
-                                 <span className="font-bold">{room.childCap}</span>
-                              </div>
-                           </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="text-2xl font-black text-gray-900 border-b-2 border-transparent hover:border-[#0758AA] w-fit cursor-pointer transition-all">
-                            ${room.price}
-                          </div>
-                          <div className="text-xs text-gray-500 mt-1">{language === 'ar' ? 'شامل الضرائب والرسوم' : 'Includes taxes & fees'}</div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <section className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 bg-pink-50/30">
-                <div className="flex items-center gap-2 mb-4">
-                  <Baby className="w-5 h-5 text-pink-500" />
-                  <h2 className="text-xl font-bold">{language === 'ar' ? 'سياسات الأطفال' : 'Children Policies'}</h2>
+            {/* Pricing Details */}
+            <section className="bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="bg-[#EBF3FF] p-3 rounded-xl border border-[#0758AA]/10 text-[#0758AA]">
+                   <Info className="w-6 h-6" />
                 </div>
-                <div className="space-y-3">
-                  {stay.childRules.map((rule, idx) => (
-                    <div key={idx} className="flex justify-between items-center bg-white p-3 border border-pink-100 rounded-xl shadow-sm">
-                      <span className="text-gray-700 font-medium whitespace-nowrap">
-                        {language === 'ar' ? `الأعمار من ${rule.ageFrom} إلى ${rule.ageTo}` : `Age ${rule.ageFrom} to ${rule.ageTo}`}
-                      </span>
-                      <span className="text-pink-600 font-bold bg-pink-50 px-3 py-1 rounded-lg">
-                        {rule.discount === 100 ? (language === 'ar' ? 'مجاناً' : 'Free') : `${rule.discount}% OFF`}
-                      </span>
+                <h2 className="text-2xl font-bold tracking-tight text-gray-900">{language === 'ar' ? 'معلومات الأسعار والسياسات' : 'Pricing & Policies Information'}</h2>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 {/* Adult pricing details */}
+                 <div className="relative overflow-hidden bg-gradient-to-br from-[#f8f9fa] to-white p-6 rounded-2xl border border-gray-200 hover:border-[#0758AA]/30 hover:shadow-md transition-all group">
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-[#0758AA]/5 rounded-bl-full -z-10 group-hover:bg-[#0758AA]/10 transition-colors" />
+                    <div className="flex items-center gap-3 mb-6">
+                       <div className="bg-white p-2.5 rounded-lg shadow-sm border border-gray-100 text-[#0758AA]">
+                         <Users className="w-5 h-5" />
+                       </div>
+                       <h3 className="font-bold text-lg text-gray-900">{language === 'ar' ? 'سياسة البالغين' : 'Adults Policy'}</h3>
                     </div>
-                  ))}
-                </div>
-              </section>
-            </div>
+                    <ul className="space-y-4 text-sm font-medium text-gray-600">
+                       <li className="flex items-start gap-3">
+                          <Check className="w-5 h-5 text-green-500 shrink-0" />
+                          <span className="leading-relaxed">{language === 'ar' ? 'السعر الأساسي للغرفة يشمل شخصين بالغين.' : 'Base room price includes 2 adults.'}</span>
+                       </li>
+                       <li className="flex items-start gap-3">
+                          <Check className="w-5 h-5 text-green-500 shrink-0" />
+                          <span className="leading-relaxed">{language === 'ar' ? 'تطبق رسوم إضافية بقيمة 40$ لليلة لكل شخص بالغ إضافي.' : 'Additional charge of $40 per night applies for each extra adult.'}</span>
+                       </li>
+                       <li className="flex items-start gap-3">
+                          <Check className="w-5 h-5 text-green-500 shrink-0" />
+                          <span className="leading-relaxed">{language === 'ar' ? 'الحد الأقصى للبالغين يعتمد على نوع الغرفة المختارة.' : 'Maximum adults depend on the selected room type.'}</span>
+                       </li>
+                    </ul>
+                 </div>
+                 
+                 {/* Kids pricing details */}
+                 <div className="relative overflow-hidden bg-gradient-to-br from-[#fff5f7] to-white p-6 rounded-2xl border border-pink-100 hover:border-pink-300 hover:shadow-md transition-all group">
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-pink-500/5 rounded-bl-full -z-10 group-hover:bg-pink-500/10 transition-colors" />
+                    <div className="flex items-center gap-3 mb-6">
+                       <div className="bg-white p-2.5 rounded-lg shadow-sm border border-pink-50 text-pink-500">
+                         <Baby className="w-5 h-5" />
+                       </div>
+                       <h3 className="font-bold text-lg text-gray-900">{language === 'ar' ? 'سياسة الأطفال' : 'Children Policy'}</h3>
+                    </div>
+                    
+                    <div className="space-y-4 text-sm font-medium">
+                       <div className="space-y-2">
+                         {stay.childRules.map((rule, idx) => (
+                           <div key={idx} className="flex justify-between items-center bg-white p-3 border border-pink-50 rounded-xl shadow-sm">
+                             <span className="text-gray-700">
+                               {language === 'ar' ? `الأعمار من ${rule.ageFrom} إلى ${rule.ageTo} سنة` : `Ages ${rule.ageFrom} to ${rule.ageTo} years`}
+                             </span>
+                             <span className="text-pink-600 font-bold bg-pink-50 px-3 py-1 rounded-lg text-sm">
+                               {rule.discount === 100 ? (language === 'ar' ? 'إقامة مجانية' : 'Free Stay') : `خصم ${rule.discount}%`}
+                             </span>
+                           </div>
+                         ))}
+                       </div>
+                       <div className="flex items-start gap-3 mt-4 pt-4 border-t border-pink-100">
+                          <Info className="w-5 h-5 text-pink-500 shrink-0 mt-0.5" />
+                          <span className="text-gray-600 leading-relaxed font-medium">{language === 'ar' ? 'تطبق رسوم بقيمة 25$ لليلة للأطفال خارج الفئات العمرية المشمولة بالخصم المجاني.' : 'A fee of $25 per night applies for children outside discounted age groups.'}</span>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+            </section>
+
           </div>
 
-          {/* Booking Widget */}
-          <div className="flex-[1]">
+          {/* Sidebar / Booking Details */}
+          <div className="flex-[1] lg:order-last w-full">
+            {/* The user screenshot shows "موقع ممتاز" map at top of sidebar, let's add that here maybe, or keep our booking widget. We will keep our widget but maybe restyle it slightly. */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden mb-6">
+               <div className="bg-[#EBF3FF] p-4 flex items-center justify-between border-b border-[#0758AA]/10">
+                 <div>
+                    <h3 className="font-bold text-gray-900">{language === 'ar' ? 'موقع ممتاز: نقاط تقييم مرتفعة' : 'Excellent Location'}</h3>
+                    <p className="text-sm text-gray-600 mt-1">{language === 'ar' ? 'من ضيوف حديثين (9.4)' : 'From recent guests (9.4)'}</p>
+                 </div>
+                 <div className="w-10 h-10 flex items-center justify-center bg-white rounded-full text-[#0758AA] shadow-sm">
+                   <MapPin className="w-5 h-5" />
+                 </div>
+               </div>
+               <div className="p-4 bg-gray-50 flex items-start gap-3 border-b border-gray-100">
+                  <Coffee className="w-5 h-5 text-gray-600 shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="font-bold text-sm text-gray-900">{language === 'ar' ? 'معلومات حول الإفطار' : 'Breakfast Information'}</h4>
+                    <p className="text-xs text-gray-600 mt-1">{language === 'ar' ? 'كونتيننتال، و نباتي، و نباتي صرف، و حلال' : 'Continental, Vegetarian, Vegan, Halal'}</p>
+                  </div>
+               </div>
+               <div className="p-4 bg-gray-50 flex items-start gap-3">
+                  <ParkingCircle className="w-5 h-5 text-gray-600 shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-900">{language === 'ar' ? 'يتوفر موقف سيارات خاص مجاني في الموقع' : 'Free private parking available on site'}</h4>
+                  </div>
+               </div>
+            </div>
+
             <div className="bg-white p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-100 sticky top-8">
-              <h3 className="font-bold text-2xl text-gray-900 mb-6">
+              <h3 className="font-bold text-2xl text-gray-900 mb-2">
                 {language === 'ar' ? 'تفاصيل الحجز' : 'Booking Details'}
               </h3>
+              <p className="text-sm text-gray-500 mb-6">
+                {language === 'ar' ? 'أدخل تفاصيل إقامتك في الصفحة التالية' : 'Enter your stay details on the next page'}
+              </p>
               
-              <div className="space-y-5 mb-6">
-                {/* Room Selection */}
-                <div className="space-y-2">
-                   <label className="text-sm font-bold text-gray-700">{language === 'ar' ? 'اختر الغرفة' : 'Select Room'}</label>
-                   <select 
-                     value={selectedRoomId} 
-                     onChange={(e) => setSelectedRoomId(e.target.value)}
-                     className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-gray-900 font-medium focus:ring-2 focus:ring-[#0758AA] outline-none"
-                   >
-                      {stay.rooms.map(room => (
-                        <option key={room.id} value={room.id}>{room.type} - ${room.price}</option>
-                      ))}
-                   </select>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  {/* Nights */}
-                  <div className="space-y-2">
-                     <label className="text-sm font-bold text-gray-700">{language === 'ar' ? 'الليالي' : 'Nights'}</label>
-                     <div className="flex items-center justify-between bg-gray-50 border border-gray-200 rounded-xl p-2">
-                       <button onClick={() => setNights(Math.max(1, nights - 1))} className="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-gray-600 hover:text-[#0758AA]">
-                         <Minus className="w-4 h-4" />
-                       </button>
-                       <span className="font-bold text-gray-900">{nights}</span>
-                       <button onClick={() => setNights(nights + 1)} className="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-gray-600 hover:text-[#0758AA]">
-                         <Plus className="w-4 h-4" />
-                       </button>
-                     </div>
-                  </div>
-                  {/* Rooms */}
-                  <div className="space-y-2">
-                     <label className="text-sm font-bold text-gray-700">{language === 'ar' ? 'الغرف' : 'Rooms'}</label>
-                     <div className="flex items-center justify-between bg-gray-50 border border-gray-200 rounded-xl p-2">
-                       <button onClick={() => setRoomsCount(Math.max(1, roomsCount - 1))} className="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-gray-600 hover:text-[#0758AA]">
-                         <Minus className="w-4 h-4" />
-                       </button>
-                       <span className="font-bold text-gray-900">{roomsCount}</span>
-                       <button onClick={() => setRoomsCount(roomsCount + 1)} className="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-gray-600 hover:text-[#0758AA]">
-                         <Plus className="w-4 h-4" />
-                       </button>
-                     </div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  {/* Adults */}
-                  <div className="space-y-2">
-                     <label className="text-sm font-bold text-gray-700">{language === 'ar' ? 'البالغين' : 'Adults'}</label>
-                     <div className="flex items-center justify-between bg-gray-50 border border-gray-200 rounded-xl p-2">
-                       <button onClick={() => setAdults(Math.max(1, adults - 1))} className="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-gray-600 hover:text-[#0758AA]">
-                         <Minus className="w-4 h-4" />
-                       </button>
-                       <span className="font-bold text-gray-900">{adults}</span>
-                       <button onClick={() => setAdults(adults + 1)} className="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-gray-600 hover:text-[#0758AA]">
-                         <Plus className="w-4 h-4" />
-                       </button>
-                     </div>
-                  </div>
-                  {/* Kids */}
-                  <div className="space-y-2">
-                     <label className="text-sm font-bold text-gray-700">{language === 'ar' ? 'الأطفال' : 'Kids'}</label>
-                     <div className="flex items-center justify-between bg-gray-50 border border-gray-200 rounded-xl p-2">
-                       <button onClick={() => setKids(Math.max(0, kids - 1))} className="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-gray-600 hover:text-[#0758AA]">
-                         <Minus className="w-4 h-4" />
-                       </button>
-                       <span className="font-bold text-gray-900">{kids}</span>
-                       <button onClick={() => setKids(kids + 1)} className="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-gray-600 hover:text-[#0758AA]">
-                         <Plus className="w-4 h-4" />
-                       </button>
-                     </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gray-50 p-4 rounded-xl mb-6 shadow-inner border border-gray-100 space-y-3 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-16 h-16 bg-[#0758AA]/5 rounded-bl-full" />
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-gray-600">{language === 'ar' ? 'سعر الغرفة' : 'Room Base Price'} ({roomsCount}x)</span>
-                  <span className="font-bold">${roomBasePrice * roomsCount * nights}</span>
-                </div>
-                {kidsPrice > 0 && (
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-600">{language === 'ar' ? 'رسوم الأطفال' : 'Kids Fees'}</span>
-                    <span className="font-bold text-orange-600">+${kidsPrice * nights}</span>
-                  </div>
-                )}
-                {extraAdultPrice > 0 && (
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-600">{language === 'ar' ? 'رسوم اضافية (بالغين)' : 'Extra Adults'}</span>
-                    <span className="font-bold text-orange-600">+${extraAdultPrice * nights}</span>
-                  </div>
-                )}
-                <div className="pt-3 border-t border-gray-200 flex justify-between items-end">
-                  <div>
-                    <span className="block text-gray-700 font-bold mb-1">{language === 'ar' ? 'الإجمالي' : 'Total Price'}</span>
-                    <span className="text-xs text-gray-500">{language === 'ar' ? 'شامل الضرائب والرسوم' : 'Includes taxes & fees'}</span>
-                  </div>
-                  <span className="text-4xl font-black text-[#0758AA]">${totalPrice}</span>
+              <div className="flex justify-between items-end mb-6 pb-6 border-b border-gray-100">
+                <span className="text-gray-700 font-bold">{language === 'ar' ? 'تبدأ من' : 'Starting from'}</span>
+                <div>
+                   <span className="text-4xl font-black text-[#0758AA] text-right block">${stay.rooms[0].price}</span>
+                   <span className="text-xs text-gray-500 block text-right mt-1">{language === 'ar' ? 'للشخص / ليلة' : 'per person / night'}</span>
                 </div>
               </div>
 
@@ -362,8 +304,8 @@ export default function BookPage() {
                 >
                   {language === 'ar' ? 'مراجعة سياسات الفندق والإلغاء' : 'Review hotel & cancellation policies'}
                 </Link>
-                <p className="text-center text-xs text-gray-400 mt-2">
-                  {language === 'ar' ? 'لن يتم خصم أي مبلغ الآن' : 'You won\'t be charged yet'}
+                <p className="text-center text-xs text-gray-400 mt-2 leading-relaxed">
+                  {language === 'ar' ? 'لن يتم خصم أي مبلغ الآن. يمكنك اختيار الغرف وعدد الأشخاص في الخطوة التالية.' : 'You won\'t be charged yet. You can select rooms and guests in the next step.'}
                 </p>
               </div>
             </div>

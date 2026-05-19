@@ -1,15 +1,15 @@
 'use client';
 
-import React, { use } from 'react';
+import React from 'react';
 import { useLanguage } from '@/components/LanguageProvider';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight, MapPin, Calendar, Users, CreditCard, Download, Star, CheckCircle, Info } from 'lucide-react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 
-export default function AdminBookingDetailsPage({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = use(params);
-  const { id } = resolvedParams;
+export default function AdminBookingDetailsPage() {
+  const params = useParams();
+  const id = params.id as string;
   const { language } = useLanguage();
   const isAr = language === 'ar';
   const router = useRouter();
