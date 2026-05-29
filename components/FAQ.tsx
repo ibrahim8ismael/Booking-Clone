@@ -16,31 +16,31 @@ export function FAQ() {
   const faqs = [
     {
       id: "item-1",
-      q: isAr ? "كيف يمكنني حجز إقامة؟" : "How do I book a stay?",
+      q: isAr ? "كيف يمكنني حجز رحلتي؟" : "How can I book my trip?",
       a: isAr 
-        ? "يمكنك حجز إقامة بسهولة عن طريق إدخال وجهتك وتواريخ السفر وعدد الضيوف في شريط البحث، ثم اختيار الإقامة المناسبة لك واتباع خطوات الدفع." 
-        : "You can easily book a stay by entering your destination, travel dates, and number of guests in the search bar, then selecting the right accommodation and following the checkout steps."
+        ? "بمنتهى السهولة! تقدر تحجز رحلتك مباشرة من خلال موقعنا، أو تشرفنا بالاتصال الهاتفي، أو زيارة مقرنا لتنسيق كافة التفاصيل مع فريق خدمة العملاء." 
+        : "It's very easy! You can book your trip directly through our website, give us a call, or visit our office to coordinate all the details with our customer service team."
     },
     {
       id: "item-2",
-      q: isAr ? "هل يمكنني إلغاء حجزي؟" : "Can I cancel my reservation?",
+      q: isAr ? "ما هي خيارات الدفع المتاحة؟" : "What payment options are available?",
       a: isAr 
-        ? "نعم، معظم الإقامات تقدم خيار إلغاء الحجز مجانًا. يرجى التحقق من سياسة الإلغاء الخاصة بكل إقامة قبل الحجز." 
-        : "Yes, most stays offer a free cancellation option. Please check the cancellation policy for each property before booking."
+        ? "بنوفر لك مرونة تامة؛ تقدر تدفع إلكترونيًا بالبطاقة البنكية، أو عبر التحويل البنكي المباشر، أو نقدًا في مقر الشركة." 
+        : "We offer you complete flexibility; you can pay electronically by credit card, via direct bank transfer, or in cash at the company headquarters."
     },
     {
       id: "item-3",
-      q: isAr ? "ما هي طرق الدفع المتاحة؟" : "What payment methods are available?",
+      q: isAr ? "لو حصل ظرف طارئ أقدر أعدل أو ألغي الحجز؟" : "If an emergency occurs, can I modify or cancel the reservation?",
       a: isAr 
-        ? "نقبل معظم بطاقات الائتمان والخصم الرئيسية، بالإضافة إلى طرق الدفع الإلكترونية المتاحة في منطقتك." 
-        : "We accept most major credit and debit cards, as well as electronic payment methods available in your region."
+        ? "أكيد، إحنا مقدرين جدًا الظروف الطارئة، تقدر تعدل حجزك وفقًا لسياسة الإلغاء والتعديل الخاصة بالشركة، وفريقنا هيساعدك تلاقي أفضل بديل متاح." 
+        : "Absolutely, we are very understanding of emergency situations. You can modify your reservation according to the company's cancellation and modification policy, and our team will help you find the best available alternative."
     },
     {
       id: "item-4",
-      q: isAr ? "هل يمكنني تغيير تواريخ الحجز؟" : "Can I change my booking dates?",
+      q: isAr ? "هل الدعم متوفر لو احتجت حاجة أثناء الرحلة؟" : "Is support available if I need something during the trip?",
       a: isAr 
-        ? "نعم، يمكنك تعديل تواريخ الحجز الخاصة بك عن طريق تسجيل الدخول إلى حسابك والذهاب إلى 'حجوزاتي'. قد تطبق رسوم تغيير بناءً على سياسة الإقامة." 
-        : "Yes, you can modify your booking dates by logging into your account and going to 'My Bookings'. Change fees may apply depending on the property's policy."
+        ? "أكيد.. إحنا معاك خطوة بخطوة، فريق الدعم الفني متاح على مدار الساعة للرد على أي استفسار أو حل أي مشكلة تواجهك أثناء رحلتك لضمان راحتك التامة." 
+        : "Definitely.. we are with you step by step. The technical support team is available around the clock to answer any inquiry or solve any problem you face during your trip to ensure your complete comfort."
     }
   ];
 

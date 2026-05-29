@@ -149,10 +149,7 @@ export default function PoliciesPage() {
               </p>
             </div>
 
-            <h2 className="text-2xl md:text-3xl font-extrabold mb-6 text-gray-900 tracking-tight mt-16">
-              {isAr ? 'جدول المحتويات' : 'Table of Contents'}
-            </h2>
-            {/* Table of contents and rest of page would go here */}
+
 
           </article>
         </main>

@@ -3,6 +3,7 @@ import './globals.css';
 import { LanguageProvider } from '@/components/LanguageProvider';
 import { AuthProvider } from '@/components/AuthProvider';
 import { Header } from '@/components/Header';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { Cairo } from "next/font/google";
 import { cn } from "@/lib/utils";
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           <AuthProvider>
             <Header />
             {children}
+            <WhatsAppButton />
           </AuthProvider>
         </LanguageProvider>
       </body>
