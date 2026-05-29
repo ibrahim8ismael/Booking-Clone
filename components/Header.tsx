@@ -50,8 +50,8 @@ export function Header() {
       <div className="max-w-6xl mx-auto px-4">
         {/* Top bar */}
         <div className="flex items-center justify-between py-4">
-          <Link href="/" className="text-xl font-bold md:text-2xl">
-            Booking.com
+          <Link href="/" className="text-xl font-bold md:text-2xl flex items-center gap-2">
+            ساعة وساعة
           </Link>
 
           <div className="flex items-center gap-2 md:gap-4">

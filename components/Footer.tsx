@@ -16,8 +16,8 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-center gap-8 mb-8 border-b border-white/20 pb-8 text-center">
           <Link href="/policies" className="hover:underline text-white/90">{isAr ? 'السياسات والشروط' : 'Policies & Terms'}</Link>
           <Link href="/tours" className="hover:underline text-white/90">{isAr ? 'رحلاتنا' : 'Our Tours'}</Link>
-          <Link href="#" className="hover:underline text-white/90">{isAr ? 'عن الشركة' : 'About Us'}</Link>
-          <Link href="#" className="hover:underline text-white/90">{isAr ? 'تواصل معنا' : 'Contact Us'}</Link>
+          <Link href="/about" className="hover:underline text-white/90">{isAr ? 'عن الشركة' : 'About Us'}</Link>
+          <Link href="/contact" className="hover:underline text-white/90">{isAr ? 'تواصل معنا' : 'Contact Us'}</Link>
         </div>
 
         <div className="text-center mb-8 border-b border-white/20 pb-8">
@@ -33,7 +33,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between font-normal gap-4">
           <div className="text-center md:text-left rtl:text-right">
             <p className="mb-2">
-              {isAr ? 'حقوق الطبع والنشر © 1996–2026 Booking.com™. جميع الحقوق محفوظة.' : 'Copyright © 1996–2026 Booking.com™. All rights reserved.'}
+              {isAr ? 'حقوق الطبع والنشر © 2026 ساعة وساعة. جميع الحقوق محفوظة.' : 'Copyright © 2026 Sa2a wi Sa2a. All rights reserved.'}
             </p>
             <p className="text-white/60 text-xs">
               {isAr ? 'تم بناء هذه النسخة لأغراض تعليمية باستخدام AI Studio.' : 'Clone built for educational purposes with AI Studio.'}
