@@ -98,14 +98,14 @@ export function UniqueStays() {
       </div>
 
       <div className="relative">
-        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pb-4">
           {stays.map((stay, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className="w-[300px] flex-shrink-0 snap-start transition-colors rounded-lg overflow-hidden flex flex-col group border border-transparent hover:border-gray-200 shadow-sm bg-white pb-3"
+              className="w-full transition-colors rounded-lg overflow-hidden flex flex-col group border border-transparent hover:border-gray-200 shadow-sm bg-white pb-3"
             >
               <Link
                 href="/book/1"
@@ -200,12 +200,6 @@ export function UniqueStays() {
           ))}
         </div>
 
-        <button className="absolute top-1/2 left-0 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center border border-gray-100 hover:bg-gray-50 hidden md:flex z-10 text-gray-800 -translate-x-1/2">
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-        <button className="absolute top-1/2 right-0 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center border border-gray-100 hover:bg-gray-50 hidden md:flex z-10 text-gray-800 translate-x-1/2">
-          <ChevronRight className="w-6 h-6" />
-        </button>
       </div>
     </div>
   );

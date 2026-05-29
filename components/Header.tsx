@@ -24,24 +24,20 @@ export function Header() {
 
   const navItems = [
     {
-      name: language === "ar" ? "الإقامات" : "Stays",
-      icon: BedDouble,
-      active: true,
+      name: language === "ar" ? "الرئيسية" : "Home",
+      path: "/",
     },
     {
-      name: language === "ar" ? "رحلات الطيران" : "Flights",
-      icon: Plane,
-      active: false,
+      name: language === "ar" ? "رحلاتنا" : "Tours",
+      path: "/tours",
     },
     {
-      name: language === "ar" ? "الرحلات الجوية + الفنادق" : "Flight + Hotel",
-      icon: TreePalm,
-      active: false,
+      name: language === "ar" ? "عن الشركة" : "About Us",
+      path: "/about",
     },
     {
-      name: language === "ar" ? "تأجير السيارات" : "Car rentals",
-      icon: Car,
-      active: false,
+      name: language === "ar" ? "تواصل معنا" : "Contact Us",
+      path: "/contact",
     },
   ];
 
@@ -53,6 +49,19 @@ export function Header() {
           <Link href="/" className="text-xl font-bold md:text-2xl flex items-center gap-2">
             ساعة وساعة
           </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-6 font-bold">
+            {navItems.map((item) => (
+              <Link 
+                key={item.path} 
+                href={item.path}
+                className={cn("hover:text-black/70 transition-colors", pathname === item.path && "underline decoration-2 underline-offset-4 border-b-0")}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
 
           <div className="flex items-center gap-2 md:gap-4">
             <button

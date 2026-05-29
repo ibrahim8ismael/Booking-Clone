@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useLanguage } from '@/components/LanguageProvider';
-import { Users, Building, Calendar, DollarSign, TrendingUp, TrendingDown } from 'lucide-react';
+import { Users, Map, Calendar, DollarSign, TrendingUp, TrendingDown } from 'lucide-react';
 
 export default function AdminDashboardPage() {
   const { language } = useLanguage();
@@ -31,20 +31,20 @@ export default function AdminDashboardPage() {
       isPositive: false
     },
     { 
-      title: isAr ? 'الفنادق النشطة' : 'Active Hotels', 
-      value: '84', 
-      icon: Building,
+      title: isAr ? 'الرحلات النشطة' : 'Active Tours', 
+      value: '24', 
+      icon: Map,
       trend: '+5%',
       isPositive: true
     },
   ];
 
   const recentBookings = [
-    { id: 'BK-100234', customer: 'Ibrahim Ismael', hotel: 'Palm Hotel & Resort', amount: '$1,250', status: 'Confirmed' },
-    { id: 'BK-100235', customer: 'Sarah Johnson', hotel: 'Serenity Suites', amount: '$720', status: 'Pending' },
-    { id: 'BK-100236', customer: 'Ahmed Ali', hotel: 'Grand Plaza', amount: '$450', status: 'Confirmed' },
-    { id: 'BK-100237', customer: 'Emma Wilson', hotel: 'Sea View Resort', amount: '$890', status: 'Cancelled' },
-    { id: 'BK-100238', customer: 'Mohammed R.', hotel: 'Oasis Hotel', amount: '$320', status: 'Confirmed' },
+    { id: 'BK-100234', customer: 'Ibrahim Ismael', tour: 'Sharm El Sheikh Gateway', amount: '$1,250', status: 'Confirmed' },
+    { id: 'BK-100235', customer: 'Sarah Johnson', tour: 'Luxor & Aswan Cruise', amount: '$720', status: 'Pending' },
+    { id: 'BK-100236', customer: 'Ahmed Ali', tour: 'Dahab Adventure', amount: '$450', status: 'Confirmed' },
+    { id: 'BK-100237', customer: 'Emma Wilson', tour: 'Hurghada Resort Stay', amount: '$890', status: 'Cancelled' },
+    { id: 'BK-100238', customer: 'Mohammed R.', tour: 'Cairo City Tour', amount: '$320', status: 'Confirmed' },
   ];
 
   return (
@@ -87,7 +87,7 @@ export default function AdminDashboardPage() {
               <tr>
                 <th className="px-6 py-4 font-medium">{isAr ? 'رقم الحجز' : 'Booking ID'}</th>
                 <th className="px-6 py-4 font-medium">{isAr ? 'العميل' : 'Customer'}</th>
-                <th className="px-6 py-4 font-medium">{isAr ? 'الفندق' : 'Hotel'}</th>
+                <th className="px-6 py-4 font-medium">{isAr ? 'الرحلة' : 'Tour'}</th>
                 <th className="px-6 py-4 font-medium">{isAr ? 'المبلغ' : 'Amount'}</th>
                 <th className="px-6 py-4 font-medium">{isAr ? 'الحالة' : 'Status'}</th>
               </tr>
@@ -97,7 +97,7 @@ export default function AdminDashboardPage() {
                 <tr key={i} className="hover:bg-gray-50 transition-colors text-sm">
                   <td className="px-6 py-4 font-medium text-gray-900">{booking.id}</td>
                   <td className="px-6 py-4 text-gray-600">{booking.customer}</td>
-                  <td className="px-6 py-4 text-gray-600">{booking.hotel}</td>
+                  <td className="px-6 py-4 text-gray-600">{booking.tour}</td>
                   <td className="px-6 py-4 font-medium text-gray-900">{booking.amount}</td>
                   <td className="px-6 py-4">
                     <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${

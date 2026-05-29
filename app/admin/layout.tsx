@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useLanguage } from '@/components/LanguageProvider';
-import { LayoutDashboard, Users, Building, Calendar, Globe, LogOut, Menu } from 'lucide-react';
+import { LayoutDashboard, Users, Map, Calendar, Globe, LogOut, Menu } from 'lucide-react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { language, setLanguage } = useLanguage();
@@ -18,7 +18,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const navItems = [
     { name: isAr ? 'لوحة التحكم' : 'Dashboard', href: '/admin', icon: LayoutDashboard },
-    { name: isAr ? 'الفنادق' : 'Hotels', href: '/admin/hotels', icon: Building },
+    { name: isAr ? 'الرحلات' : 'Tours', href: '/admin/tours', icon: Map },
     { name: isAr ? 'الحجوزات' : 'Bookings', href: '/admin/bookings', icon: Calendar },
     { name: isAr ? 'العملاء' : 'Customers', href: '/admin/customers', icon: Users },
   ];
